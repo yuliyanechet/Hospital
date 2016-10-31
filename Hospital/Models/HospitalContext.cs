@@ -15,19 +15,5 @@ namespace Hospital.Models
         public DbSet<Patient> Patients { get; set; }
 
         public DbSet<Doctor> Doctors { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-
-            modelBuilder.Entity<Doctor>()
-                .HasMany<Patient>(s => s.Patients)
-                .WithMany(c => c.Doctors)
-                .Map(cs =>
-                {
-                    cs.MapLeftKey("DoctorRefId");
-                    cs.MapRightKey("PatientRefId");
-                    cs.ToTable("PatientsDoctors");
-                });
-        }
     }
 }
